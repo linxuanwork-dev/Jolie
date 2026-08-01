@@ -1,0 +1,434 @@
+<title>Jolie — Admin, Bookkeeping &amp; Wealth Advisory</title>
+<style>
+  :root {
+    --bg: #FBF3E7;
+    --surface: #FFFFFF;
+    --surface-2: #F3E4D0;
+    --ink: #2B1E14;
+    --ink-soft: #5C4A3A;
+    --muted: #8A7460;
+    --accent: #B4772E;
+    --accent-strong: #8C531F;
+    --accent-soft: #E8C795;
+    --line: #E4D3B8;
+    --whatsapp: #3F9142;
+
+    --fs-display: clamp(2.6rem, 6vw, 4.8rem);
+    --fs-h2: clamp(1.7rem, 3.2vw, 2.5rem);
+    --fs-h3: 1.28rem;
+    --fs-body: 1.05rem;
+    --fs-small: 0.86rem;
+
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1E1610;
+      --surface: #2A1F16;
+      --surface-2: #34281B;
+      --ink: #F3E6D4;
+      --ink-soft: #D8C4AC;
+      --muted: #A38F78;
+      --accent: #E0A94E;
+      --accent-strong: #F0C077;
+      --accent-soft: #4A3620;
+      --line: #4A3A28;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1E1610;
+    --surface: #2A1F16;
+    --surface-2: #34281B;
+    --ink: #F3E6D4;
+    --ink-soft: #D8C4AC;
+    --muted: #A38F78;
+    --accent: #E0A94E;
+    --accent-strong: #F0C077;
+    --accent-soft: #4A3620;
+    --line: #4A3A28;
+  }
+  :root[data-theme="light"] {
+    --bg: #FBF3E7;
+    --surface: #FFFFFF;
+    --surface-2: #F3E4D0;
+    --ink: #2B1E14;
+    --ink-soft: #5C4A3A;
+    --muted: #8A7460;
+    --accent: #B4772E;
+    --accent-strong: #8C531F;
+    --accent-soft: #E8C795;
+    --line: #E4D3B8;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow-x: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; color: var(--ink); }
+  p { margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem clamp(1.25rem, 4vw, 2.5rem); max-width: 1080px; margin: 0 auto; }
+  .brand { font-family: var(--serif); font-size: 1.3rem; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; }
+  .nav-links a { text-decoration: none; font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--whatsapp); color: #fff; padding: 0.5rem 1.1rem; border-radius: 999px;
+    display: flex; align-items: center; gap: 0.45rem; text-decoration: none; font-size: var(--fs-small);
+    font-weight: 600; letter-spacing: 0.02em;
+  }
+  @media (max-width: 640px) { .nav-links a.hide-mobile { display: none; } }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 8vw, 5rem);
+    background:
+      radial-gradient(60% 55% at 82% 8%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .hero-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+  @media (max-width: 860px) { .hero-inner { grid-template-columns: 1fr; } }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-strong);
+    margin-bottom: 1.1rem; font-weight: 600;
+  }
+  .eyebrow::before { content: ""; width: 1.5rem; height: 1px; background: var(--accent); }
+  h1.display { font-size: var(--fs-display); line-height: 1.02; }
+  .hero-cn { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 1.15rem; margin-top: 0.8rem; }
+  .hero-sub { margin-top: 1.4rem; max-width: 46ch; color: var(--ink-soft); font-size: 1.08rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.1rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.85rem 1.6rem; border-radius: 999px; text-decoration: none;
+    font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em;
+    border: 1px solid transparent; transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--whatsapp); color: #fff; }
+  .btn-primary:hover { background: #368239; }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+  .hero-badge {
+    justify-self: center; position: relative;
+    width: min(280px, 70vw); aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(155deg, var(--accent-soft), var(--surface-2));
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-badge span {
+    font-family: var(--serif); font-size: 5rem; color: var(--accent-strong);
+  }
+  .hero-badge::after {
+    content: "20 YEARS IN ACCOUNTS";
+    position: absolute; bottom: -0.6rem; left: 50%; transform: translateX(-50%);
+    background: var(--surface); border: 1px solid var(--line); color: var(--ink-soft);
+    font-size: 0.68rem; letter-spacing: 0.1em; padding: 0.45rem 0.9rem; border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* Trust strip */
+  .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+  .stats-inner { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 1080px; margin: 0 auto; }
+  .stat { text-align: center; padding: 1.8rem 1rem; }
+  .stat + .stat { border-left: 1px solid var(--line); }
+  .stat-num { font-family: var(--serif); font-size: 2rem; color: var(--accent-strong); }
+  .stat-label { font-size: var(--fs-small); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.3rem; }
+  @media (max-width: 640px) { .stat-label { letter-spacing: 0.02em; } }
+
+  /* Section heading */
+  section { padding: clamp(3.5rem, 8vw, 5.5rem) 0; }
+  .section-head { max-width: 62ch; margin-bottom: 2.6rem; }
+  .kicker { font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-strong); font-weight: 600; }
+  .section-head h2 { margin-top: 0.6rem; }
+  .section-head .lede { color: var(--ink-soft); margin-top: 0.8rem; }
+
+  /* Services */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  @media (max-width: 860px) { .services-grid { grid-template-columns: 1fr; } }
+  .service-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 2rem 1.7rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .service-icon {
+    width: 2.6rem; height: 2.6rem; border-radius: 10px; background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center; color: var(--accent-strong);
+  }
+  .service-card h3 { font-size: var(--fs-h3); }
+  .service-card p { color: var(--ink-soft); font-size: 0.97rem; }
+  .service-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .service-list li { font-size: 0.9rem; color: var(--ink-soft); padding-left: 1.1rem; position: relative; }
+  .service-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+  .service-card.featured { border-color: var(--accent); background: linear-gradient(175deg, color-mix(in srgb, var(--accent-soft) 55%, var(--surface)), var(--surface)); }
+
+  /* About */
+  .about { background: var(--surface-2); }
+  .about-inner { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+  @media (max-width: 860px) { .about-inner { grid-template-columns: 1fr; } }
+  .about-quote { font-family: var(--serif); font-size: 1.3rem; line-height: 1.5; color: var(--ink); }
+  .about-quote::before { content: "“"; color: var(--accent); }
+  .about-quote::after { content: "”"; color: var(--accent); }
+  .about-sign { margin-top: 1.3rem; font-family: var(--serif); font-style: italic; color: var(--accent-strong); font-size: 1.15rem; }
+  .about-portrait {
+    aspect-ratio: 4/5; border-radius: 16px; background: linear-gradient(160deg, var(--accent-soft), var(--surface));
+    border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+  }
+  .about-portrait span { font-family: var(--serif); font-size: 6rem; color: var(--accent-strong); }
+
+  /* Why one-stop */
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  @media (max-width: 860px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-item { padding: 1.4rem 0; border-top: 1px solid var(--line); }
+  .why-item h3 { font-size: 1.02rem; font-family: var(--sans); font-weight: 600; }
+  .why-item p { font-size: 0.92rem; color: var(--ink-soft); margin-top: 0.4rem; }
+
+  /* CTA / Contact */
+  .cta { background: var(--ink); color: var(--bg); border-radius: 20px; margin: 0 clamp(0, 2vw, 0) ; }
+  .cta-wrap { padding: clamp(2.5rem, 6vw, 4rem); }
+  .cta-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 3rem); }
+  @media (max-width: 860px) { .cta-inner { grid-template-columns: 1fr; } }
+  .cta h2 { color: var(--bg); }
+  .cta .lede { color: color-mix(in srgb, var(--bg) 70%, transparent); margin-top: 0.8rem; }
+  .cta .btn-primary { margin-top: 1.6rem; }
+  .cta-contact-line { display: flex; align-items: center; gap: 0.7rem; margin-top: 0.9rem; font-size: 0.95rem; color: color-mix(in srgb, var(--bg) 85%, transparent); }
+  .cta-contact-line a { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--bg) 40%, transparent); }
+
+  .form { display: flex; flex-direction: column; gap: 0.9rem; }
+  .form label { font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.06em; color: color-mix(in srgb, var(--bg) 65%, transparent); }
+  .form input, .form textarea {
+    width: 100%; padding: 0.75rem 0.9rem; border-radius: 8px; border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent);
+    background: color-mix(in srgb, var(--bg) 8%, transparent); color: var(--bg); font-family: var(--sans); font-size: 0.95rem;
+  }
+  .form input::placeholder, .form textarea::placeholder { color: color-mix(in srgb, var(--bg) 45%, transparent); }
+  .form input:focus, .form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .form textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form button {
+    margin-top: 0.3rem; align-self: flex-start; background: var(--accent); color: var(--ink);
+    border: none; padding: 0.85rem 1.7rem; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; transition: background 0.15s ease;
+  }
+  .form button:hover { background: var(--accent-strong); color: var(--bg); }
+
+  /* Footer */
+  footer { padding: 2.5rem 0 3rem; }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; border-top: 1px solid var(--line); padding-top: 1.6rem; }
+  .footer-brand { font-family: var(--serif); font-size: 1.1rem; }
+  .footer-note { font-size: var(--fs-small); color: var(--muted); }
+
+  /* Floating WhatsApp */
+  .float-wa {
+    position: fixed; bottom: 1.4rem; right: 1.4rem; z-index: 60;
+    width: 3.4rem; height: 3.4rem; border-radius: 50%; background: var(--whatsapp);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    text-decoration: none; transition: transform 0.15s ease;
+  }
+  .float-wa:hover { transform: scale(1.06); }
+
+  .placeholder-note {
+    font-size: 0.72rem; color: var(--muted); text-align: center; padding: 0.6rem 1rem 0;
+  }
+</style>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">Jolie</div>
+    <div class="nav-links">
+      <a href="#services" class="hide-mobile">Services</a>
+      <a href="#about" class="hide-mobile">About</a>
+      <a href="#contact" class="hide-mobile">Contact</a>
+      <a class="nav-cta" href="https://wa.me/60123456789" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.92C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.38c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42-.14-.01-.3-.01-.47-.01a.9.9 0 0 0-.65.3c-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Personal Practice · Accounts &amp; Advisory</div>
+      <h1 class="display">Jolie</h1>
+      <p class="hero-cn">专业帮你打理帐目，也为未来做好安排。</p>
+      <p class="hero-sub">One person, one relationship, every number and every plan handled with care — admin, bookkeeping, and wealth advisory under a single roof, built on 20 years in accounts.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://wa.me/60123456789" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.92C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.38c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42-.14-.01-.3-.01-.47-.01a.9.9 0 0 0-.65.3c-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="#contact">Enquire by form</a>
+      </div>
+    </div>
+    <div class="hero-badge"><span>J</span></div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Years in Accounts</div></div>
+    <div class="stat"><div class="stat-num">3-in-1</div><div class="stat-label">Admin · Books · Advisory</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Point of Contact</div></div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What I handle</div>
+      <h2>A one-stop service, so nothing falls through the cracks</h2>
+      <p class="lede">Most business owners juggle three separate people for admin, accounts, and financial planning. I bring all three under one relationship — so decisions in one area are made with the full picture in view.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </div>
+        <h3>Admin</h3>
+        <p>The day-to-day paperwork and correspondence handled reliably, so you can stay focused on running your business.</p>
+        <ul class="service-list">
+          <li>Document &amp; records management</li>
+          <li>Correspondence &amp; scheduling</li>
+          <li>Statutory &amp; compliance filing support</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 4v5h5M8 13h8M8 17h5"/></svg>
+        </div>
+        <h3>Bookkeeping</h3>
+        <p>Clean, accurate books maintained monthly — built on two decades of hands-on accounts experience.</p>
+        <ul class="service-list">
+          <li>Monthly bookkeeping &amp; reconciliation</li>
+          <li>Payroll &amp; expense tracking</li>
+          <li>Management reports you can act on</li>
+        </ul>
+      </div>
+      <div class="service-card featured">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Wealth Advisory</h3>
+        <p>Once your accounts are in order, we plan for what's next — protecting and growing what you've built.</p>
+        <ul class="service-list">
+          <li>Insurance planning</li>
+          <li>Will &amp; estate arrangement</li>
+          <li>Investment planning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-inner">
+    <div class="about-portrait"><span>J</span></div>
+    <div>
+      <div class="kicker">About Jolie</div>
+      <p class="about-quote" style="margin-top: 0.8rem;">I've spent 20 years in accounts — and I've seen how much easier things get when admin, bookkeeping, and financial planning aren't scattered across three different people.</p>
+      <p class="about-sign">— Jolie</p>
+      <p class="hero-sub" style="margin-top: 1.2rem; max-width: 52ch;">That experience is why this practice is built the way it is: one relationship, one person who knows your numbers end to end, from the smallest receipt to your long-term financial plan.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Why one-stop</div>
+      <h2>Fewer handoffs, better decisions</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <h3>Full picture</h3>
+        <p>Your bookkeeping and your financial plan are handled by the same person — not siloed.</p>
+      </div>
+      <div class="why-item">
+        <h3>20 years' judgment</h3>
+        <p>Two decades of hands-on accounts work means fewer surprises and cleaner records.</p>
+      </div>
+      <div class="why-item">
+        <h3>Personal &amp; direct</h3>
+        <p>No call centres or account managers rotating — you speak with Jolie directly.</p>
+      </div>
+      <div class="why-item">
+        <h3>Plan ahead</h3>
+        <p>Insurance, will, and investment planning built on top of accounts that are already in order.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="cta">
+      <div class="cta-wrap cta-inner">
+        <div>
+          <h2>Let's get your admin, books, and future in order</h2>
+          <p class="lede">Message me on WhatsApp for the fastest reply, or send the details below and I'll get back to you.</p>
+          <a class="btn btn-primary" href="https://wa.me/60123456789" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.92C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.38c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42-.14-.01-.3-.01-.47-.01a.9.9 0 0 0-.65.3c-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <div class="cta-contact-line">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            <a href="mailto:hello@jolieaccounts.com">hello@jolieaccounts.com</a>
+          </div>
+        </div>
+        <form class="form" action="mailto:hello@jolieaccounts.com" method="post" enctype="text/plain">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-row">
+            <label for="contact">WhatsApp / Email</label>
+            <input id="contact" name="Contact" type="text" placeholder="How can I reach you?" required />
+          </div>
+          <div class="form-row">
+            <label for="message">What do you need help with?</label>
+            <textarea id="message" name="Message" placeholder="Admin, bookkeeping, insurance, will, investment..."></textarea>
+          </div>
+          <button type="submit">Send enquiry</button>
+        </form>
+      </div>
+    </div>
+    <p class="placeholder-note">Replace the WhatsApp number and email above with Jolie's actual contact details before publishing.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">Jolie</div>
+    <div class="footer-note">Admin · Bookkeeping · Wealth Advisory — © 2026</div>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/60123456789" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.92C21.96 6.45 17.5 2 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.38c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.24.25-.4.08-.16.04-.3-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42-.14-.01-.3-.01-.47-.01a.9.9 0 0 0-.65.3c-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.52.59.19 1.12.16 1.54.1.47-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+</a>
